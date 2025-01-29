@@ -1,0 +1,12 @@
+* {
+  background-color: aliceblue;
+}
+aside h4,
+aside p {
+  background-color: rgb(196, 199, 226);
+  margin: 0;
+  padding: 0;
+}
+footer {
+  text-align: center;
+}
