@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add User Form</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+      }
+
+      form {
+        width: 90%;
+        max-width: 500px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      fieldset {
+        border: 2px solid #ccc;
+        padding: 20px;
+      }
+
+      legend {
+        font-weight: bold;
+        padding: 0 10px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      select,
+      textarea,
+      input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      textarea {
+        resize: vertical;
+        height: 100px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/submit" method="POST">
+      <fieldset>
+        <legend>Add User</legend>
+
+        <!-- First Name Input -->
+        <label for="first-name">First Name:</label>
+        <input
+          type="text"
+          id="first-name"
+          name="first-name"
+          placeholder="Enter your first name"
+          required
+        />
+
+        <!-- Last Name Input -->
+        <label for="last-name">Last Name:</label>
+        <input
+          type="text"
+          id="last-name"
+          name="last-name"
+          placeholder="Enter your last name"
+          required
+        />
+
+        <!-- Email Input -->
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <!-- Status Select -->
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+          <option value="student">Student</option>
+          <option value="instructor">Instructor</option>
+          <option value="guest">Guest</option>
+        </select>
+
+        <!-- Favorite Programming Language -->
+        <p>Choose your favorite programming language:</p>
+        <input type="radio" id="html" name="language" value="html" />
+        <label for="html">HTML</label><br />
+        <input type="radio" id="css" name="language" value="css" />
+        <label for="css">CSS</label><br />
+        <input
+          type="radio"
+          id="javascript"
+          name="language"
+          value="javascript"
+        />
+        <label for="javascript">JavaScript</label><br />
+
+        <!-- Comments Textarea -->
+        <label for="comments">Comments:</label>
+        <textarea
+          id="comments"
+          name="comments"
+          placeholder="Enter your comments"
+        ></textarea>
+
+        <!-- Current Date Input -->
+        <label for="current-date">Current Date:</label>
+        <input type="date" id="current-date" name="current-date" required />
+
+        <!-- Newsletter Checkbox -->
+        <input type="checkbox" id="newsletter" name="newsletter" />
+        <label for="newsletter">Sign up for newsletter</label><br />
+
+        <!-- Terms and Conditions Checkbox -->
+        <input type="checkbox" id="terms" name="terms" required />
+        <label for="terms">Agree to terms and conditions</label><br />
+      </fieldset>
+
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
