@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Awesome Website</title>
+    <style>
+      /* Global Styles */
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333333;
+      }
+
+      h1 {
+        font-family: "Poppins", sans-serif;
+        color: #2e86ab;
+        text-align: center;
+      }
+
+      h2 {
+        color: #2e86ab;
+      }
+
+      nav {
+        background-color: #2e86ab;
+        padding: 10px;
+        text-align: center;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      section {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .gallery img {
+        border: 2px solid #ff6b6b;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      form label {
+        margin: 10px 0 5px;
+      }
+
+      form input,
+      form textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      form button {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #2e86ab;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      form button:hover {
+        background-color: #1c5a7a;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      ul li {
+        margin: 10px 0;
+      }
+
+      ul li a {
+        color: #ff6b6b;
+        text-decoration: none;
+      }
+
+      ul li a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#form">Form</a>
+      <a href="#links">Links</a>
+      <a href="#gallery">Gallery</a>
+    </nav>
+
+    <!-- Page 1: Home -->
+    <section id="home">
+      <h1>Welcome to My Website!</h1>
+      <img src="https://via.placeholder.com/800x400" alt="Placeholder Image" />
+      <h2>About Me</h2>
+      <p>
+        This is a section about me. I love coding, designing, and sharing my
+        work with others.
+      </p>
+      <h2>My Hobbies</h2>
+      <p>I enjoy hiking, reading, and playing video games in my free time.</p>
+      <h2>My Goals</h2>
+      <p>
+        My goal is to become a professional web developer and create amazing
+        websites.
+      </p>
+    </section>
+
+    <!-- Page 2: Form -->
+    <section id="form">
+      <h1>Contact Me</h1>
+      <form>
+        <fieldset>
+          <legend>Your Information</legend>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <label for="subscribe">Subscribe to Newsletter:</label>
+          <input type="checkbox" id="subscribe" name="subscribe" />
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </fieldset>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- Page 3: Links -->
+    <section id="links">
+      <h1>Useful Links</h1>
+      <ul>
+        <li><a href="https://www.google.com" target="_blank">Google</a></li>
+        <li><a href="https://www.github.com" target="_blank">GitHub</a></li>
+        <li>
+          <a href="https://www.freecodecamp.org" target="_blank"
+            >freeCodeCamp</a
+          >
+        </li>
+        <li>
+          <a href="https://www.w3schools.com" target="_blank">W3Schools</a>
+        </li>
+        <li>
+          <a href="https://www.stackoverflow.com" target="_blank"
+            >Stack Overflow</a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <!-- Page 4: Gallery -->
+    <section id="gallery">
+      <h1>My Gallery</h1>
+      <div class="gallery">
+        <a href="https://via.placeholder.com/400x300" target="_blank">
+          <img src="https://via.placeholder.com/400x300" alt="Image 1" />
+        </a>
+        <a href="https://via.placeholder.com/400x300" target="_blank">
+          <img src="https://via.placeholder.com/400x300" alt="Image 2" />
+        </a>
+        <a href="https://via.placeholder.com/400x300" target="_blank">
+          <img src="https://via.placeholder.com/400x300" alt="Image 3" />
+        </a>
+        <a href="https://via.placeholder.com/400x300" target="_blank">
+          <img src="https://via.placeholder.com/400x300" alt="Image 4" />
+        </a>
+        <a href="https://via.placeholder.com/400x300" target="_blank">
+          <img src="https://via.placeholder.com/400x300" alt="Image 5" />
+        </a>
+        <a href="https://via.placeholder.com/400x300" target="_blank">
+          <img src="https://via.placeholder.com/400x300" alt="Image 6" />
+        </a>
+      </div>
+    </section>
+  </body>
+</html>
