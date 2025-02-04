@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Box Model Explained</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .box-model-container {
+        background-color: #fff;
+        padding: 20px;
+        border: 2px solid #ccc;
+        margin: 20px;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: #ffcc00;
+        padding: 20px;
+        border: 10px solid #ff6666;
+        margin: 30px auto;
+        position: relative;
+        box-sizing: border-box;
+      }
+
+      .box::before {
+        content: "Content";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .box::after {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left: -30px;
+        right: -30px;
+        bottom: -30px;
+        border: 2px dashed #666;
+        pointer-events: none;
+      }
+
+      .labels {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .labels div {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .labels .margin {
+        color: #666;
+      }
+      .labels .border {
+        color: #ff6666;
+      }
+      .labels .padding {
+        color: #66cc66;
+      }
+      .labels .content {
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Box Model Explained</h1>
+    <div class="box-model-container">
+      <div class="box"></div>
+      <div class="labels">
+        <div class="margin">Margin (30px)</div>
+        <div class="border">Border (10px)</div>
+        <div class="padding">Padding (20px)</div>
+        <div class="content">Content (200x200px)</div>
+      </div>
+    </div>
+    <p>
+      This visual representation shows how the CSS Box Model works, including
+      content, padding, border, and margin.
+    </p>
+  </body>
+</html>
