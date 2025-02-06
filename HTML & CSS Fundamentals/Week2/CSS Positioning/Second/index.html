@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Positioning Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        border: 2px solid black;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        color: white;
+        text-align: center;
+        line-height: 100px;
+      }
+      .static {
+        background: gray;
+        position: static;
+      }
+      .relative {
+        background: blue;
+        position: relative;
+        top: 20px;
+        left: 20px;
+      }
+      .absolute {
+        background: red;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+      }
+      .fixed {
+        background: green;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+      }
+      .sticky {
+        background: orange;
+        position: sticky;
+        top: 0;
+      }
+      .explanation {
+        margin-top: 20px;
+        padding: 10px;
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>CSS Positioning Techniques</h2>
+    <p>Scroll down to see the fixed and sticky elements in action.</p>
+    <div class="container">
+      <div class="box static">Static</div>
+      <div class="box relative">Relative</div>
+      <div class="box absolute">Absolute</div>
+      <div class="box fixed">Fixed</div>
+      <div class="box sticky">Sticky</div>
+    </div>
+
+    <p style="height: 1000px">Scroll down...</p>
+
+    <div class="explanation">
+      <h3>Explanation of CSS Positioning Techniques</h3>
+      <ul>
+        <li>
+          <strong>Static Positioning:</strong>
+          <p>
+            This is the default positioning for all elements. Elements with
+            <code>position: static</code> are positioned according to the normal
+            flow of the document. The <code>top</code>, <code>bottom</code>,
+            <code>left</code>, and <code>right</code> properties have no effect.
+          </p>
+        </li>
+        <li>
+          <strong>Relative Positioning:</strong>
+          <p>
+            Elements with <code>position: relative</code> are positioned
+            relative to their normal position in the document flow. You can use
+            <code>top</code>, <code>bottom</code>, <code>left</code>, and
+            <code>right</code> to offset the element from its original position.
+            The space originally occupied by the element is preserved.
+          </p>
+        </li>
+        <li>
+          <strong>Absolute Positioning:</strong>
+          <p>
+            Elements with <code>position: absolute</code> are positioned
+            relative to the nearest positioned ancestor (an ancestor with a
+            position other than <code>static</code>). If no such ancestor
+            exists, it is positioned relative to the initial containing block
+            (usually the viewport). The element is removed from the normal
+            document flow, and no space is reserved for it.
+          </p>
+        </li>
+        <li>
+          <strong>Fixed Positioning:</strong>
+          <p>
+            Elements with <code>position: fixed</code> are positioned relative
+            to the viewport. They stay in the same place even when the page is
+            scrolled. The element is removed from the normal document flow, and
+            no space is reserved for it.
+          </p>
+        </li>
+        <li>
+          <strong>Sticky Positioning:</strong>
+          <p>
+            Elements with <code>position: sticky</code> are positioned based on
+            the user's scroll position. They behave like
+            <code>relative</code> positioned elements until they reach a
+            specified threshold (e.g., <code>top: 0</code>), at which point they
+            "stick" to the viewport like a <code>fixed</code> positioned
+            element.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

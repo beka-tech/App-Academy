@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Positioning Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 200vh; /* Makes the page scrollable */
+      }
+      .container {
+        position: relative;
+        width: 80%;
+        margin: 20px auto;
+        height: 500px;
+        background: #f0f0f0;
+        border: 2px solid black;
+        overflow: hidden;
+      }
+
+      /* Static Position (default) */
+      .static-box {
+        position: static;
+        background: lightblue;
+        padding: 10px;
+      }
+
+      /* Relative Position */
+      .relative-box {
+        position: relative;
+        top: 20px;
+        left: 20px;
+        background: lightcoral;
+        padding: 10px;
+      }
+
+      /* Absolute Position */
+      .absolute-box {
+        position: sticky;
+        top: 1820px;
+        left: 20px;
+        background: lightgreen;
+        padding: 10px;
+      }
+
+      /* Fixed Position */
+      .fixed-box {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: orange;
+        padding: 10px;
+      }
+
+      /* Sticky Position */
+      .sticky-box {
+        position: sticky;
+        top: 0;
+        background: purple;
+        color: white;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sticky-box">
+      Sticky Position (Stays at the top while scrolling)
+    </div>
+
+    <div class="container">
+      <div class="static-box">Static Position (Default)</div>
+      <div class="relative-box">
+        Relative Position (Moved from normal position)
+      </div>
+      <div class="absolute-box">Absolute Position (Relative to container)</div>
+    </div>
+
+    <div class="fixed-box">Fixed Position (Always at bottom right)</div>
+  </body>
+</html>
