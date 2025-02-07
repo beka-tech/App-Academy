@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Positioning Example</title>
+    <style>
+      /* Fixed Navbar */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #333;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        z-index: 1000;
+      }
+
+      /* Navigation Links */
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links li {
+        position: relative; /* Needed for dropdown positioning */
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+      }
+
+      /* Dropdown Menu */
+      .dropdown {
+        position: absolute;
+        top: 100%; /* Positions below the parent */
+        left: 0;
+        background: #444;
+        list-style: none;
+        padding: 10px;
+        display: none;
+        width: 150px;
+      }
+
+      .nav-links li:hover .dropdown {
+        display: block; /* Shows dropdown on hover */
+      }
+
+      /* Body content to demonstrate fixed navbar */
+      .content {
+        margin-top: 80px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">MyLogo</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li>
+          <a href="#">Services ▼</a>
+          <ul class="dropdown">
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Development</a></li>
+            <li><a href="#">SEO</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <h1>Welcome to My Website</h1>
+      <p>This is some content to show the fixed navbar effect.</p>
+    </div>
+  </body>
+</html>
