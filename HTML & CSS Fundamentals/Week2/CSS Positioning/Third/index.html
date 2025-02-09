@@ -3,17 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS Positioning Demo</title>
+    <title>Futuristic CSS Positioning</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Arial", sans-serif;
+        background: #0d0d0d;
+        color: #fff;
         margin: 20px;
+        text-align: center;
+      }
+      h2 {
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: cyan;
+        text-shadow: 0 0 10px cyan;
       }
       .container {
         position: relative;
         width: 400px;
         height: 400px;
-        border: 2px solid black;
+        border: 2px solid cyan;
+        margin: 30px auto;
+        box-shadow: 0 0 20px cyan;
+        background: rgba(0, 255, 255, 0.1);
       }
       .box {
         width: 100px;
@@ -21,22 +34,26 @@
         color: white;
         text-align: center;
         line-height: 100px;
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
       }
       .static {
         background: gray;
-        position: static;
       }
       .relative {
         background: blue;
         position: relative;
         top: 20px;
         left: 20px;
+        box-shadow: 0 0 10px blue;
       }
       .absolute {
         background: red;
         position: absolute;
         top: 50px;
         right: 10px;
+        box-shadow: 0 0 10px red;
       }
       .fixed {
         background: green;
@@ -44,19 +61,24 @@
         top: 50%;
         left: 50%;
         translate: -50% -50%;
+        box-shadow: 0 0 10px green;
       }
       .sticky {
-        top: 40%;
-        left: 30%;
-        width: 50%;
         background: orange;
         position: sticky;
         top: 0;
+        width: 50%;
+        left: 25%;
+        box-shadow: 0 0 10px orange;
+      }
+      p {
+        font-size: 1.2rem;
+        opacity: 0.8;
       }
     </style>
   </head>
   <body>
-    <h2>CSS Positioning Techniques</h2>
+    <h2>Futuristic CSS Positioning</h2>
     <p>Scroll down to see the fixed and sticky elements in action.</p>
     <div class="container">
       <div class="box static">Static</div>
