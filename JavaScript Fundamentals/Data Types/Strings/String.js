@@ -1,0 +1,1 @@
+let ucFirst("join") == "John";

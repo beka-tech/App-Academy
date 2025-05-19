@@ -30,3 +30,5 @@ let sentence = "I love JavaScript";
 let result = sentence.split(" ");
 console.log(result);
 // Output: ["I", "love", "JavaScript"]
+
+console.log("car"[2]);
