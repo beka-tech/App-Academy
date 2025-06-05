@@ -1,7 +1,6 @@
 function hasThreeDifferentVowels(word) {
   const vowels = "aeiou";
   let foundVowels = [];
-  let count = 0;
   for (let i = 0; i < word.length; i++) {
     let char = word[i].toLowerCase();
 
@@ -12,9 +11,8 @@ function hasThreeDifferentVowels(word) {
   return foundVowels.length >= 3;
 }
 
-console.log(hasThreeDifferentVowels("delicious")); // true (i, e, o)
-console.log(hasThreeDifferentVowels("bootcamp prep")); // true (o, a, e)
-console.log(hasThreeDifferentVowels("bootcamp")); // false (o, a)
-console.log(hasThreeDifferentVowels("dog")); // false (o)
+console.log(hasThreeDifferentVowels("delicious")); // true 3 (i, e, o)
+console.log(hasThreeDifferentVowels("bootcamp prep")); // true 3 (o, a, e)
+console.log(hasThreeDifferentVowels("bootcamp")); // false 2 (o, a)
+console.log(hasThreeDifferentVowels("dog")); // false 1 (o)
 console.log(hasThreeDifferentVowels("go home")); // false (o, e)
-console.log(hasThreeDifferentVowels("aaaaaaaaaaie")); // false (o, e)
