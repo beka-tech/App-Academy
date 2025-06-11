@@ -1,7 +1,5 @@
 // Your code here
 function firstAndLast(array) {
-  // array[0] + array[array.length - 1];
-
   if (array.length % 2 === 0) {
     return array[0] + array[array.length - 1];
   } else {
