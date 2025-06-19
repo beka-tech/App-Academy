@@ -1,17 +1,26 @@
-function isPrime(number) {
-  if (number < 2) return false;
-
-  for (let i = 2; i < number; i++) {
-    if (number % i === 0) {
+// your code here
+let isPrime = function (num) {
+  if (num < 2) {
+    return false;
+  }
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) {
       return false;
     }
   }
-
   return true;
-}
+};
 
-console.log(isPrime(2)); // => true
-console.log(isPrime(10)); // => false
-console.log(isPrime(11)); // => true
-console.log(isPrime(9)); // => false
-console.log(isPrime(2017)); // => true
+let choosePrimes = function (number) {
+  let Prime = [];
+  for (let i = 0; i < number.length; i++) {
+    let num = number[i];
+    if (isPrime(num)) {
+      Prime.push(num);
+    }
+  }
+  return Prime;
+};
+
+console.log(choosePrimes([36, 48, 9, 13, 19])); // [ 13, 19 ]
+console.log(choosePrimes([5, 6, 4, 11, 2017])); // [ 5, 11, 2017 ]
