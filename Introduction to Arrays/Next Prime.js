@@ -1,7 +1,7 @@
 // Your code here
 
 let isPrime = function (nums) {
-  let i = 2;
+  let i = num;
 
   while (nums < i) {
     nums++;
