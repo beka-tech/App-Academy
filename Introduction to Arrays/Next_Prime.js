@@ -1,13 +1,3 @@
-let nextPrime = function (num) {
-  let i = num;
-  while (true) {
-    i++;
-    if (isPrime(i)) {
-      return i;
-    }
-  }
-};
-
 let isPrime = function (n) {
   if (n < 2) {
     return false;
@@ -20,6 +10,16 @@ let isPrime = function (n) {
   }
 
   return true;
+};
+
+let nextPrime = function (num) {
+  let i = num;
+  while (true) {
+    i++;
+    if (isPrime(i)) {
+      return i;
+    }
+  }
 };
 
 console.log(nextPrime(2)); // 3
