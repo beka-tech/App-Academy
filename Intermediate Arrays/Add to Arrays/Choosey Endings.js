@@ -1,23 +1,10 @@
-let chooseyEndings = function (words, suffix) {
-  if (!Array.isArray(words)) {
-    return [];
-  }
+// Your code here
 
-  let filteredWords = [];
-
-  for (let i = 0; i < words.length; i++) {
-    let word = words[i];
-    if (word.endsWith(suffix)) {
-      filteredWords.push(word);
-    }
-  }
-
-  return filteredWords;
-};
+function chooseyEndings(word, suffix) {}
 
 console.log(
   chooseyEndings(
-    ["family", "houndy", "catalyst", "fly", "timidly", "bond"],
+    ["family", "hound", "catalyst", "fly", "timidly", "bond"],
     "ly"
   )
 );
