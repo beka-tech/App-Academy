@@ -1,6 +1,14 @@
 // Your code here
-
-function chooseyEndings(word, suffix) {}
+let chooseyEndings = function (words, suffix) {
+  let filteredWord = [];
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    if (word.endsWith(suffix)) {
+      filteredWord.push(word);
+    }
+  }
+  return filteredWord;
+};
 
 console.log(
   chooseyEndings(
