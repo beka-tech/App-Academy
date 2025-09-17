@@ -1,10 +1,10 @@
 // Your code here
 
 let fibonacciSequence = function (nums) {
+  let seq = [];
+
   if (nums <= 0) return [];
   if (nums === 1) return [1];
-
-  let seq = [1, 1];
 
   for (let i = 2; i < nums; i++) {
     seq.push(seq[i - 1] + seq[i - 2]);
