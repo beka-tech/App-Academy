@@ -2,7 +2,7 @@
 
 let longestWord = function (Sentence) {
   let words = Sentence.split(" ");
-  let longestWord = "";
+  let longestWord = words[0];
 
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
