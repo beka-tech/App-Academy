@@ -1,5 +1,5 @@
 let rotate = function (array, num) {
-  let nums = num % array.length;
+  let nums = array.length;
   for (let i = 0; i < nums; i++) {
     let el = array.pop();
     array.unshift(el);
@@ -8,5 +8,5 @@ let rotate = function (array, num) {
 };
 
 let animals = ["wombat", "koala", "opossum", "kangaroo"];
-rotate(animals, -1);
+rotate(animals, 2);
 console.log(animals); // [ 'koala', 'opossum', 'kangaroo', 'wombat' ]

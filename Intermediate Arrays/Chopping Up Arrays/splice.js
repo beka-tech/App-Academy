@@ -1,0 +1,5 @@
+let arr = [1, 2, 3, 4, 5];
+
+arr.splice(1, 1, 80, 90);
+
+console.log(arr);
