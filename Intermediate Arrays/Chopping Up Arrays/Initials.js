@@ -5,8 +5,7 @@ let initials = function (word) {
   let newStr = [];
 
   for (let i = 0; i < str.length; i++) {
-    let el = str[i];
-    newStr.push(el[0]);
+    newStr.push(str[i][0]);
   }
   return newStr.join("").toUpperCase();
 };
