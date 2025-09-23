@@ -2,8 +2,8 @@
 
 let shortestWord = function (Sentance) {
   let words = Sentance.split(" ");
-
   let lengthWord = words[0];
+
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
     if (word.length < lengthWord.length) {
