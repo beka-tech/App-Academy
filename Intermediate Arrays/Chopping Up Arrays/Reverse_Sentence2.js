@@ -1,14 +1,18 @@
-// your code here
-let reverseSentence = function (Sentence) {
-  let words = Sentence.split(" ");
-  let ReversedWords = [];
+let rotateRight = function (array, num) {
+  let copy = array.slice();
 
-  for (let i = words.length - 1; i > 0; i--) {
-    let word = words[i];
-    ReversedWords.push(word);
+  for (let i = 0; i < num; i++) {
+    let el = copy.pop();
+    copy.unshift(el);
   }
-  return ReversedWords;
+
+  return copy;
 };
 
-console.log(reverseSentence("I am pretty hungry")); // 'hungry pretty am I'
-console.log(reverseSentence("follow the yellow brick road")); // 'road brick yellow the follow'
+let arr = ["a", "b", "c", "d", "e"];
+console.log(rotateRight(arr, 2)); // [ 'd', 'e', 'a', 'b', 'c' ]
+console.log(arr); // [ 'a', 'b', 'c', 'd', 'e' ]
+
+let animals = ["wombat", "koala", "opossum", "kangaroo"];
+console.log(rotateRight(animals, 3)); // [ 'koala', 'opossum', 'kangaroo', 'wombat' ]
+console.log(animals); // [ 'wombat', 'koala', 'opossum', 'kangaroo' ]
