@@ -6,7 +6,7 @@ let removVowels = function (word) {
     let char = word[i];
 
     if (!vowels.includes(char)) {
-      newWord += char;
+      newWord += char.toUpperCase();
     } else {
       newWord;
     }
