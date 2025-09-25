@@ -1,3 +1,5 @@
-let arr = ["a", "b", "c", "d", "e", "f", "g"];
+let word = "hello";
+let i = 4;
 
-console.log(arr.slice(1));
+let result = word[0].toUpperCase() + word.slice(1, 4);
+console.log(result); // "hllo"

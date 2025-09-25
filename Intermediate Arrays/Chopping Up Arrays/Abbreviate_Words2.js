@@ -1,30 +1,31 @@
-let removeVowels = function (word) {
-  let vowels = "aeiou";
+// your code here
+let removeVowel = function (word) {
   let newWord = "";
+  let vowel = "aeiou";
 
   for (let i = 0; i < word.length; i++) {
     let char = word[i];
-    if (!vowels.includes(char)) {
+    if (!vowel.includes(char)) {
       newWord += char;
+    } else {
+      newWord;
     }
   }
-
   return newWord;
 };
 
-let abbreviateWords = function (sentence) {
-  let words = sentence.split(" ");
+let abbreviateWords = function (Sentence) {
+  let words = Sentence.split(" ");
   let newWords = [];
 
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
     if (word.length > 4) {
-      newWords.push(removeVowels(word));
+      newWords.push(removeVowel(word));
     } else {
       newWords.push(word);
     }
   }
-
   return newWords.join(" ");
 };
 
