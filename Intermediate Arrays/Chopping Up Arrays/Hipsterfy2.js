@@ -1,9 +1,9 @@
+// your code here
 let removeLastVowel = function (word) {
-  let vowels = "aeiou";
+  let vowels = "AEIOUaeiou";
 
-  for (let i = word.length - 1; i >= 0; i--) {
-    let char = word[i];
-    if (vowels.includes(char)) {
+  for (let i = word.length - 1; i > 0; i--) {
+    if (vowels.includes(word[i])) {
       return word.slice(0, i) + word.slice(i + 1);
     }
   }
@@ -11,9 +11,8 @@ let removeLastVowel = function (word) {
 };
 
 let hipsterfy = function (sentence) {
-  let newWords = [];
   let words = sentence.split(" ");
-
+  let newWords = [];
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
     newWords.push(removeLastVowel(word));
