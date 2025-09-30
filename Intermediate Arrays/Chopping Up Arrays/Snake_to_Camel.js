@@ -1,4 +1,3 @@
-// Your code here
 let snakeToCamel = function (Sentence) {
   let words = Sentence.split("_");
   let newWord = [];
@@ -7,7 +6,7 @@ let snakeToCamel = function (Sentence) {
     let word = words[i];
     newWord.push(word[0].toUpperCase() + word.slice(1));
   }
-  return newWord.join(" ");
+  return newWord.join("");
 };
 
 console.log(snakeToCamel("snakes_go_hiss")); // 'SnakesGoHiss'
