@@ -20,7 +20,7 @@ let translate = function (word) {
   let vowel = "aeiouAEIOU";
 
   if (vowel.includes(word[word.length - 1])) {
-    return word + word;
+    return (word + word).toUpperCase();
   }
 
   for (let i = 0; i < word.length; i++) {
