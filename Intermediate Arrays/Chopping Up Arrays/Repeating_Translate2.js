@@ -14,13 +14,12 @@
 // capitalized in the translated sentence. Vowels are the letters a, e, i, o, u.
 //
 // Can you reduce the problem into helper functions?
+
 // Your code here
-
-let translate = function (word) {
-  let vowel = "aeiouAEIOU";
-
+let tanslate = function (word) {
+  let vowel = "aeiou";
   if (vowel.includes(word[word.length - 1])) {
-    return (word + word).toUpperCase();
+    return word + word;
   }
 
   for (let i = word.length; i > 0; i--) {
@@ -29,7 +28,6 @@ let translate = function (word) {
     }
   }
 };
-
 let repeatingTranslate = function (Sentence) {
   let words = Sentence.split(" ");
   let newWord = [];
@@ -37,7 +35,7 @@ let repeatingTranslate = function (Sentence) {
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
     if (word.length > 3) {
-      newWord.push(translate(word));
+      newWord.push(tanslate(word));
     } else {
       newWord.push(word);
     }
@@ -45,8 +43,6 @@ let repeatingTranslate = function (Sentence) {
   return newWord.join(" ");
 };
 
-console.log(repeatingTranslate("trash")); // "trashash"
-console.log(repeatingTranslate("like")); // "likelike"
 console.log(repeatingTranslate("we like to go running fast")); // "we likelike to go runninging fastast"
 console.log(repeatingTranslate("he cannot find the trash")); // "he cannotot findind thethe trashash"
 console.log(repeatingTranslate("pasta is my favorite dish")); // "pastapasta is my favoritefavorite dishish"
