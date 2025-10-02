@@ -1,15 +1,18 @@
 // Your code here
+let fibonacciSequence = function (n) {
+  let a = 1;
+  let b = 1;
+  let c = 0;
+  let fib = [];
 
-let fibonacciSequence = function (nums) {
-  let seq = [];
-
-  if (nums <= 0) return [];
-  if (nums === 1) return [1];
-
-  for (let i = 2; i < nums; i++) {
-    seq.push(seq[i - 1] + seq[i - 2]);
+  while (c < n) {
+    fib.push(a);
+    let temp = b;
+    b = b + a;
+    a = temp;
+    c += 1;
   }
-  return seq;
+  return fib;
 };
 
 console.log(fibonacciSequence(4)); // [ 1, 1, 2, 3 ]
