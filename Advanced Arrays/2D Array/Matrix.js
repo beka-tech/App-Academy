@@ -3,8 +3,11 @@ let matrix = [
   [4, 5, 6],
   [7, 8, 9],
 ];
-
+let mat = [];
 for (let i = 0; i < matrix.length; i++) {
-  for (let j = 0; j < matrix[i].length; j++) {}
+  for (let j = 0; j < matrix[i].length; j++) {
+    console.log(matrix[i][j]);
+  }
 }
-console.log(matrix[1][1]);
+
+// console.log(mat);
