@@ -12,9 +12,9 @@ function sumRow(matrix) {
 }
 
 matrix = [
-  [5, 9, 21],
-  [9, 19, 6],
-  [12, 14, 15],
+  [5, 2, 3],
+  [2, 3, 4],
+  [3, 4, 5],
 ];
 
 console.log(sumRow(matrix)); // [35, 34, 41]
