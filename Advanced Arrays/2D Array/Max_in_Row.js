@@ -1,19 +1,22 @@
 function maxRow(matrix) {
-  // your code here...
   let max = [];
+
   for (let row = 0; row < matrix.length; row++) {
-    let maxVal = matrix[row][0];
-    for (let col = 1; col < matrix.length; col++) {
+    let maxVal = matrix[row][0]; // start with first element in the row
+
+    for (let col = 1; col < matrix[row].length; col++) {
       if (matrix[row][col] > maxVal) {
         maxVal = matrix[row][col];
       }
     }
-    max.push(maxVal);
+
+    max.push(maxVal); // store biggest value from this row
   }
+
   return max;
 }
 
-matrix = [
+let matrix = [
   [5, 9, 21],
   [9, 19, 6],
   [12, 14, 15],
