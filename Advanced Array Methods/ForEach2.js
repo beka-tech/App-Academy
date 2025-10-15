@@ -1,2 +1,2 @@
 let toys = ["car", "ball", "doll"];
-toys.forEach();
+toys.forEach((toy) => console.log(toy));
