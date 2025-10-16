@@ -8,15 +8,25 @@ methods.
 
 Examples:
 
-console.log(shortestWord('what a wonderful life'));     // 'a'
-console.log(shortestWord('the quick brown fox jumps')); // 'fox'
-console.log(shortestWord('do what you enjoy'));         // 'do'
 
 */
 
-let shortestWord = function(sentence) {
-  // Your code here
+let shortestWord = function (sentence) {
+  let words = sentence.split(" ");
+  let shortest = "";
+
+  words.forEach(function (word) {
+    if (shortest === "" || word.length <= shortest.length) {
+      shortest = word;
+    }
+  });
+
+  return shortest;
 };
+
+console.log(shortestWord("what a wonderful life")); // 'a'
+console.log(shortestWord("the quick brown fox jumps")); // 'fox'
+console.log(shortestWord("do what you enjoy")); // 'do'
 
 // Your code here
 
@@ -26,4 +36,4 @@ try {
   module.exports = shortestWord;
 } catch (e) {
   module.exports = null;
-}
+}
