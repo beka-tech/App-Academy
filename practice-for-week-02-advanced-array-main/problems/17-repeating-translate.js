@@ -28,19 +28,50 @@ console.log(repeatingTranslate("her family flew to France"));   // "herer family
 
 */
 
-let repeatingTranslate = function(sentence) {
-    // Your code here
+let repeatingTranslate = function (sentence) {
+  return sentence.split(" ").map(translateWord).join(" ");
 };
 
+let translateWord = function (word) {
+  const vowels = "aeiouAEIOU";
 
-let translateWord = function(word) {
-    // Your code here
+  // words shorter than 3 characters remain unchanged
+  if (word.length < 3) return word;
+
+  let lastChar = word[word.length - 1];
+
+  // if ends with vowel → repeat the word
+  if (vowels.includes(lastChar)) {
+    return word + word;
+  } else {
+    // find index of last vowel
+    let lastVowelIndex = -1;
+    for (let i = word.length - 1; i >= 0; i--) {
+      if (vowels.includes(word[i])) {
+        lastVowelIndex = i;
+        break;
+      }
+    }
+
+    if (lastVowelIndex !== -1) {
+      let repeatPart = word.slice(lastVowelIndex);
+      return word + repeatPart;
+    } else {
+      // no vowels, just return the word
+      return word;
+    }
+  }
 };
+
+console.log(repeatingTranslate("we like to go running fast")); // "we likelike to go runninging fastast"
+console.log(repeatingTranslate("he cannot find the trash")); // "he cannotot findind thethe trashash"
+console.log(repeatingTranslate("pasta is my favorite dish")); // "pastapasta is my favoritefavorite dishish"
+console.log(repeatingTranslate("her family flew to France")); // "herer familyily flewew to FranceFrance"
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 
 try {
-    module.exports = repeatingTranslate;
+  module.exports = repeatingTranslate;
 } catch (e) {
-    module.exports = null;
-}
+  module.exports = null;
+}

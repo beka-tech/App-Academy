@@ -8,19 +8,30 @@ methods.
 
 Examples:
 
-console.log(hipsterfy('When should everyone wake up?')); // 'Whn shold everyon wak p?'
-console.log(hipsterfy('get ready for our bootcamp')); // 'gt redy fr or bootcmp'
-console.log(hipsterfy('panthers are great animals')); // 'panthrs ar gret animls'
 
 */
 
-let removeLastVowel = function(word) {
-    // Your code here
+let removeLastVowel = function (word) {
+  // Your code here
+  let vowels = "aeiou";
+
+  for (let i = word.length - 1; i >= 0; i--) {
+    let char = word[i];
+    if (vowels.includes(char)) {
+      return word.slice(0, i) + word.slice(i + 1);
+    }
+  }
+  return word;
 };
 
-let hipsterfy = function(sentence) {
-    // Your code here
+let hipsterfy = function (sentence) {
+  // Your code here
+  return sentence.split(" ").map(removeLastVowel).join(" ");
 };
+
+console.log(hipsterfy("When should everyone wake up?")); // 'Whn shold everyon wak p?'
+console.log(hipsterfy("get ready for our bootcamp")); // 'gt redy fr or bootcmp'
+console.log(hipsterfy("panthers are great animals")); // 'panthrs ar gret animls'
 
 // alternative solution using Array.map
 // let hipsterfy = function(sentence) {
@@ -30,7 +41,7 @@ let hipsterfy = function(sentence) {
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 
 try {
-    module.exports = hipsterfy;
+  module.exports = hipsterfy;
 } catch (e) {
-    module.exports = null;
-}
+  module.exports = null;
+}
