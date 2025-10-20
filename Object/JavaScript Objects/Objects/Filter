@@ -1,0 +1,7 @@
+const scores = { alice: 92, bob: 68, eve: 77 };
+// TODO: print only those with score ≥ 70
+Object.entries(scores).forEach(([key, value]) => {
+  if (value > 70) {
+    console.log(key, value);
+  }
+});
