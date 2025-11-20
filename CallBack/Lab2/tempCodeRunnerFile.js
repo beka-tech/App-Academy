@@ -1,0 +1,2 @@
+
+    newVal.push(cb(el));
