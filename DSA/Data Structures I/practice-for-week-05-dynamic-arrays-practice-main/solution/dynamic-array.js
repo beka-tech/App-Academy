@@ -42,18 +42,26 @@ class DynamicArray {
 
     return removed;
   }
-  shift() {}
+  shift() {
+    if (this.length === 0) return `Empty Array`;
+    const removed = this.data[0];
+    for (let i = 1; i < this.length; i++) {
+      this.data[i - 1] = this.data[i];
+    }
+    this.data[this.length - 1];
+    this.length--;
+    return removed;
+  }
 }
 
 const arr = new DynamicArray(4);
 
-// arr.push(1);
-// arr.push(2);
-// arr.push(3);
-// arr.pop();
-arr.unshift(10);
-arr.unshift(20);
-arr.unshift(30);
+arr.push(1);
+arr.shift();
+arr.push(2);
+arr.push(3);
+arr.unshift(4);
+arr.pop();
 
 console.log(arr.read(1));
 console.log(arr.read(2));
