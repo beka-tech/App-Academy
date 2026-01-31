@@ -1,0 +1,27 @@
+{
+  "name": "data-structures-linked-lists-queue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appacademy-starters/algorithms-big-o-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appacademy-starters/algorithms-big-o-starter/issues"
+  },
+  "homepage": "https://github.com/appacademy-starters/algorithms-big-o-starter#readme",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "chai-spies": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5"
+  }
+}

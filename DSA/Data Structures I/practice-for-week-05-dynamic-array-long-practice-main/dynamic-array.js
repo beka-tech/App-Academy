@@ -14,9 +14,11 @@ class DynamicArray {
 
   push(val) {
     // Your code here
-    if (this.length == this.capacity) {
-      return;
+
+    if (this.length === this.capacity) {
+      this.resize();
     }
+
     this.data[this.length] = val;
     this.length++;
   }
@@ -25,7 +27,7 @@ class DynamicArray {
     // Your code here
     if (this.length === 0) return;
     const removed = this.data[this.length - 1];
-    this.data[this.length - 1];
+    this.data[this.length - 1] = null;
     this.length--;
     return removed;
   }
@@ -44,7 +46,9 @@ class DynamicArray {
 
   unshift(val) {
     // Your code here
-    if (this.data === this.capacity) return;
+    if (this.length === this.capacity) {
+      this.resize();
+    }
     for (let i = this.length; i > 0; i--) {
       this.data[i] = this.data[i - 1];
     }
@@ -63,17 +67,31 @@ class DynamicArray {
 
   resize() {
     // Your code here
+    let newCapacity = this.capacity * 2;
+    let newData = new Array(newCapacity);
+
+    for (let i = 0; i < this.length; i++) {
+      newData[i] = this.data[i];
+    }
+    this.data = newData;
+    this.capacity = newCapacity;
   }
 }
 
 const arr = new DynamicArray(4);
+arr.resize();
+arr.push(0);
 arr.push(1);
 arr.push(2);
+arr.push(3);
+arr.push(4);
+arr.push(5);
+arr.push(6);
 
 arr.shift();
 arr.unshift();
 arr.read();
 arr.indexOf(1);
-console.log(arr.read(1));
+console.log(arr.read(5));
 
 module.exports = DynamicArray;
