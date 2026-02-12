@@ -7,4 +7,4 @@ function processUserInput(callback) {
   callback(name);
 }
 
-processUserInput(greet);
+processUserInput(greet); // Hello Alice

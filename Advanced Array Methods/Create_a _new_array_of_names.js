@@ -7,7 +7,7 @@ const students = [
 let newarr = [];
 
 students.forEach(function (student) {
-  newarr.push(student.name);
+  newarr.push(student.name + "  " + student.grade);
 });
 
 console.log(newarr);

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1
+      id="mainHeading"
+      class="header title"
+      style="color: darkgreen; font-family: sans-serif"
+      title="Main heading of the page"
+      lang="en"
+      dir="ltr"
+      tabindex="0"
+      contenteditable="true"
+      draggable="true"
+      spellcheck="true"
+    >
+      Welcome to My Website
+    </h1>
+
+    <em>This is my <strong>Last</strong> learn HTML and CSS</em>
+    <p draggable="true">This Is Draggable</p>
+    <p draggable="false">This Is UNdraggable</p>
+    <p
+      draggable="true"
+      ondragstart="event.dataTransfer.setData('text/plain', 'This is a draggable paragraph');"
+    >
+      Drag me around!
+    </p>
+    <textarea style="width: 300px; height: 400px" spellcheck="true"></textarea>
+  </body>
+</html>

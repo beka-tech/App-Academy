@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Click to Start or Stop</h2>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="rest">Stop</button>
+    <p id="output"></p>
+
+    <script>
+      let counter = 0;
+      let timerId;
+
+      document.getElementById("start").onclick = () => {
+        if (!timerId) {
+          timerId = setInterval(() => {
+            counter++;
+            document.getElementById("output").textContent = "Count: " + counter;
+          }, 1000);
+        }
+      };
+
+      document.getElementById("stop").onclick = () => {
+        clearInterval(timerId);
+        timerId = null;
+      };
+
+      document.getElementById("rest").onclick = () => {
+        clearInterval(timerId);
+        timerId = 0;
+      };
+    </script>
+  </body>
+</html>
