@@ -1,5 +1,3 @@
-const { use } = require("react");
-
 function getUser() {
   return fetch(
     "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",

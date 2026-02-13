@@ -13,7 +13,7 @@ const gettodo = () => {
     .then((products) => {
       // console.log(typeof data);
       // let total = 0;
-      let price = products.price;
+      let price = products
 
       // products.forEach((product) => {
       //   total += product.price;
