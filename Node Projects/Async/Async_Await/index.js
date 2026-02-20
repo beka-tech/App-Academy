@@ -16,7 +16,7 @@ async function getUser() {
 }
 
 getUser()
-  .then((data) => console.log("resolved", data))
+  .then((data) => console.log("resolved", data.name))
   .catch((error) => console.log(error.message));
 
 // const user1 = getUser();
