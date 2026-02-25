@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "beka",
+  "license": "MIT",
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "nodemon": "^3.1.14",
+    "uid": "^2.0.2",
+    "uuid": "^13.0.0",
+    "uuidv4": "^6.2.13",
+    "v4": "^0.0.1"
+  }
+}

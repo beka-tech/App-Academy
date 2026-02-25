@@ -1,12 +1,17 @@
-const EventEmitter = require("events");
+const logEvent = require("./LogEvent");
+const EventEmiiter = require("events");
 
-// Create an event emitter instance
-const myEmitter = new EventEmitter();
+class MyEmitter extends EventEmiiter {}
+const myEmitter = new MyEmitter();
 
-// Register an event listener
-myEmitter.off("greet", () => {
-  console.log("Hello there!");
+myEmitter.on("log", (msg) => {
+  logEvent(msg);
 });
 
-// Emit the event
-myEmitter.emit("greet"); // Outputs: Hello there!
+setTimeout(() => {
+  let count = 5;
+  while (count >= 0) {
+    myEmitter.emit("log", "log Event Emitted");
+    count--;
+  }
+}, 200);
