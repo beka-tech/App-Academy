@@ -12,9 +12,7 @@ const logEvent = async (message) => {
   console.log(log);
 
   try {
-    if (!fs.existsSync(path.join(__dirname, "logs"))) {
-      await fsprom.mkdir(path.join(__dirname, "logs"));
-    }
+    await fsprom.mkdir(path.join(__dirname, "logs"), { recursive: true });
     await fsprom.appendFile(
       path.join(__dirname, "logs", "eventLog.txt"),
       log,
