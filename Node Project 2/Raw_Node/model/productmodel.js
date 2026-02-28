@@ -1,4 +1,6 @@
 const products = require("../data/products.json");
+const { WriteDataFile } = require("../util");
+const { generate4DigitId, getPostData } = require("../util");
 
 function findAll() {
   return new Promise((resolve, reject) => {
@@ -13,4 +15,13 @@ function findByID(id) {
   });
 }
 
-module.exports = { findAll, findByID };
+function create(product) {
+  return new Promise((resolve, reject) => {
+    const newproduct = { id: generate4DigitId(), ...product };
+    products.push(newproduct);
+    WriteDataFile("./data/products.json", products);
+    resolve(newproduct);
+  });
+}
+
+module.exports = { findAll, findByID, create };

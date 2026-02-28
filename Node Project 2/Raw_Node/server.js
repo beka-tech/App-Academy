@@ -3,6 +3,7 @@ const PORT = 5000;
 const {
   getproduct,
   getProductByID,
+  createProduct,
 } = require("./Controller/productController");
 
 const server = http.createServer((req, res) => {
@@ -11,6 +12,8 @@ const server = http.createServer((req, res) => {
   } else if (req.url.match(/^\/product\/\d+$/) && req.method === "GET") {
     const id = req.url.split("/").pop();
     getProductByID(req, res, id);
+  } else if (req.url === "/create" && req.method === "POST") {
+    createProduct(req, res);
   } else if (req.url.match(/^\/product\/\d+$/) && req.method === "DELETE") {
     const id = req.url.split("/").pop();
     DeleteProductByID(req, res, id);

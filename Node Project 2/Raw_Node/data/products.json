@@ -32,5 +32,23 @@
   {
     "id": "a9635a01-8ee3-4ad5-be6e-155e63ffeb99",
     "name": "Add your name in the body"
+  },
+  {
+    "id": "2735",
+    "name": "Sony TV",
+    "description": "The ultimate home entertainment 72' ",
+    "price": 1399.99
+  },
+  {
+    "id": "5842",
+    "name": "Sony TV",
+    "description": "The ultimate home entertainment 72' ",
+    "price": 1299.99
+  },
+  {
+    "id": "8431",
+    "name": "TV",
+    "description": "The ultimate home entertainment 72' ",
+    "price": 3999
   }
 ]
