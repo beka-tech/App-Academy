@@ -47,8 +47,14 @@
   },
   {
     "id": "8431",
+    "name": "Washing Machine ",
+    "description": "The ultimate Time Saver ",
+    "price": 24999
+  },
+  {
+    "id": "7769",
     "name": "TV",
     "description": "The ultimate home entertainment 72' ",
-    "price": 3999
+    "price": 24999
   }
 ]

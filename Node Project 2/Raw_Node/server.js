@@ -4,6 +4,7 @@ const {
   getproduct,
   getProductByID,
   createProduct,
+  UpdateProductByID,
 } = require("./Controller/productController");
 
 const server = http.createServer((req, res) => {
@@ -14,6 +15,9 @@ const server = http.createServer((req, res) => {
     getProductByID(req, res, id);
   } else if (req.url === "/create" && req.method === "POST") {
     createProduct(req, res);
+  } else if (req.url.match(/^\/update\/\d+$/) && req.method === "PUT") {
+    const id = req.url.split("/").pop();
+    UpdateProductByID(req, res, id);
   } else if (req.url.match(/^\/product\/\d+$/) && req.method === "DELETE") {
     const id = req.url.split("/").pop();
     DeleteProductByID(req, res, id);
