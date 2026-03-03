@@ -9,7 +9,7 @@ const {
 } = require("./Controller/productController");
 
 const server = http.createServer((req, res) => {
-  if (req.url === "/product" && req.method === "GET") {
+  if (req.url === "/" && req.method === "GET") {
     getproduct(req, res);
   } else if (req.url.match(/^\/product\/\d+$/) && req.method === "GET") {
     const id = req.url.split("/").pop();

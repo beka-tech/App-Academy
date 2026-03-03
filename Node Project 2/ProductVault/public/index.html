@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Products MVC</title>
+
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: #111a2e;
+        --muted: #8ea0c3;
+        --text: #e8eefc;
+        --border: #1e2a46;
+        --ok: #18b77e;
+        --bad: #ff5c7a;
+        --btn: #1b2b52;
+        --btn2: #233a70;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --radius: 16px;
+        font-family: ui-sans-serif, system-ui;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+          1200px 600px at 20% 0%,
+          #172a57 0%,
+          var(--bg) 55%
+        );
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 26px 18px 60px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 16px;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.18);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 12px;
+      }
+      textarea {
+        min-height: 90px;
+      }
+      .btn {
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, var(--btn2), var(--btn));
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 12px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn.ok {
+        border-color: #0e3b2c;
+        background: rgba(24, 183, 126, 0.2);
+      }
+      .btn.danger {
+        border-color: #5a1b2a;
+        background: rgba(255, 92, 122, 0.2);
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid var(--border);
+        margin-top: 10px;
+      }
+      .table th,
+      .table td {
+        padding: 10px;
+        border-bottom: 1px solid var(--border);
+      }
+      .status {
+        margin-top: 12px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <h1>Products MVC (JSON DB)</h1>
+
+      <div class="grid">
+        <!-- LEFT SIDE -->
+        <section class="card">
+          <h3>All Products</h3>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+
+          <div class="status" id="listStatus">Ready</div>
+        </section>
+
+        <!-- RIGHT SIDE -->
+        <section class="card">
+          <h3>Create / Update Product</h3>
+
+          <div>
+            <label>ID (for update/delete)</label>
+            <input id="id" />
+          </div>
+
+          <div>
+            <label>Name</label>
+            <input id="name" />
+          </div>
+
+          <div>
+            <label>Description</label>
+            <textarea id="description"></textarea>
+          </div>
+
+          <div>
+            <label>Price</label>
+            <input type="number" id="price" />
+          </div>
+
+          <div class="row" style="margin-top: 12px">
+            <button class="btn ok" onclick="createProduct()">Create</button>
+            <button class="btn" onclick="updateProduct()">Update</button>
+            <button class="btn danger" onclick="deleteProduct()">Delete</button>
+            <button class="btn" onclick="getProduct()">Get</button>
+          </div>
+
+          <div class="status" id="editStatus">Ready</div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const tbody = document.getElementById("tbody");
+
+      async function loadProducts() {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+
+        tbody.innerHTML = "";
+        data.forEach((p) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+      <td>${p.id}</td>
+      <td>${p.name}</td>
+      <td>$${p.price}</td>
+      <td>
+        <button onclick="fillForm('${p.id}')">Edit</button>
+      </td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      async function createProduct() {
+        const body = getFormData();
+        const res = await fetch("/api/products", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        document.getElementById("editStatus").innerText = "Created!";
+        loadProducts();
+      }
+
+      async function updateProduct() {
+        const id = document.getElementById("id").value;
+        const body = getFormData();
+        await fetch(`/api/products/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        document.getElementById("editStatus").innerText = "Updated!";
+        loadProducts();
+      }
+
+      async function deleteProduct() {
+        const id = document.getElementById("id").value;
+        await fetch(`/api/products/${id}`, { method: "DELETE" });
+        document.getElementById("editStatus").innerText = "Deleted!";
+        loadProducts();
+      }
+
+      async function getProduct() {
+        const id = document.getElementById("id").value;
+        const res = await fetch(`/api/products/${id}`);
+        const data = await res.json();
+        fillFields(data);
+      }
+
+      function fillForm(id) {
+        fetch(`/api/products/${id}`)
+          .then((res) => res.json())
+          .then((data) => fillFields(data));
+      }
+
+      function fillFields(data) {
+        document.getElementById("id").value = data.id;
+        document.getElementById("name").value = data.name;
+        document.getElementById("description").value = data.description;
+        document.getElementById("price").value = data.price;
+      }
+
+      function getFormData() {
+        return {
+          name: document.getElementById("name").value,
+          description: document.getElementById("description").value,
+          price: document.getElementById("price").value,
+        };
+      }
+
+      loadProducts();
+    </script>
+  </body>
+</html>

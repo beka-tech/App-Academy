@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Products UI (Node HTTP Backend)</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: #111a2e;
+        --muted: #8ea0c3;
+        --text: #e8eefc;
+        --border: #1e2a46;
+        --ok: #18b77e;
+        --bad: #ff5c7a;
+        --warn: #ffcc66;
+        --btn: #1b2b52;
+        --btn2: #233a70;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --radius: 16px;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+          1200px 600px at 20% 0%,
+          #172a57 0%,
+          var(--bg) 55%
+        );
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 26px 18px 60px;
+      }
+      header {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 0.3px;
+      }
+      .sub {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 16px;
+        backdrop-filter: blur(8px);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 6px;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.18);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 12px;
+        outline: none;
+      }
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: #2f4ea8;
+        box-shadow: 0 0 0 3px rgba(47, 78, 168, 0.25);
+      }
+      .btn {
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, var(--btn2), var(--btn));
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 12px;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        transition:
+          transform 0.05s ease,
+          filter 0.15s ease;
+        user-select: none;
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn.secondary {
+        background: rgba(0, 0, 0, 0.18);
+        font-weight: 600;
+      }
+      .btn.danger {
+        border-color: #5a1b2a;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 92, 122, 0.22),
+          rgba(255, 92, 122, 0.12)
+        );
+      }
+      .btn.ok {
+        border-color: #0e3b2c;
+        background: linear-gradient(
+          180deg,
+          rgba(24, 183, 126, 0.22),
+          rgba(24, 183, 126, 0.12)
+        );
+      }
+      .pill {
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 7px 10px;
+        background: rgba(0, 0, 0, 0.18);
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.16);
+      }
+      .table th,
+      .table td {
+        padding: 10px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+        font-size: 13px;
+      }
+      .table th {
+        text-align: left;
+        color: var(--muted);
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.25px;
+      }
+      .table tr:hover td {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .status {
+        margin-top: 12px;
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.18);
+        border-radius: 14px;
+        padding: 10px 12px;
+        font-size: 13px;
+        line-height: 1.35;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .status.ok {
+        border-color: rgba(24, 183, 126, 0.35);
+      }
+      .status.bad {
+        border-color: rgba(255, 92, 122, 0.35);
+      }
+      .kbd {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        color: #cfe0ff;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      @media (max-width: 520px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+      .rightTools {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .hint {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .small {
+        font-size: 12px;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--muted);
+        display: inline-block;
+      }
+      .dot.ok {
+        background: var(--ok);
+      }
+      .dot.bad {
+        background: var(--bad);
+      }
+      .dot.warn {
+        background: var(--warn);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div>
+          <h1>Products UI</h1>
+          <div class="sub">
+            Works with your routes:
+            <span class="kbd">GET /product</span>,
+            <span class="kbd">GET /product/:id</span>,
+            <span class="kbd">POST /create</span>,
+            <span class="kbd">PUT /update/:id</span>,
+            <span class="kbd">DELETE /delete/:id</span>.
+            <br />
+            Default API base is
+            <span class="kbd">http://localhost:5000/</span> (your server listens
+            there). :contentReference[oaicite:4]{index=4}
+          </div>
+        </div>
+
+        <div class="rightTools">
+          <div class="pill">
+            <div class="tag">
+              <span id="apiDot" class="dot warn"></span
+              ><span class="nowrap">API:</span>
+              <span id="apiBaseText" class="kbd">http://localhost:5000/</span>
+            </div>
+          </div>
+          <button class="btn secondary" id="pingBtn" title="Test connection">
+            Ping
+          </button>
+          <button class="btn" id="reloadBtn" title="Reload products list">
+            Reload
+          </button>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- LEFT: List -->
+        <section class="card">
+          <div class="row" style="justify-content: space-between">
+            <div>
+              <div style="font-weight: 800">All products</div>
+              <div class="muted small">
+                Click a row to load it into the editor. Only numeric IDs can be
+                fetched/updated/deleted due to your route regex.
+              </div>
+            </div>
+            <div class="row">
+              <input
+                id="search"
+                placeholder="Search by name/description…"
+                style="width: 260px; max-width: 70vw"
+              />
+              <select id="sort" style="width: 190px">
+                <option value="id_asc">Sort: ID (asc)</option>
+                <option value="id_desc">Sort: ID (desc)</option>
+                <option value="price_asc">Sort: Price (asc)</option>
+                <option value="price_desc">Sort: Price (desc)</option>
+                <option value="name_asc">Sort: Name (A→Z)</option>
+                <option value="name_desc">Sort: Name (Z→A)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top: 12px; overflow: auto">
+            <table class="table" id="table">
+              <thead>
+                <tr>
+                  <th style="width: 110px">ID</th>
+                  <th>Name</th>
+                  <th style="width: 120px">Price</th>
+                  <th style="width: 140px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <tr>
+                  <td colspan="4" class="muted">Loading…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="status" id="listStatus">Ready.</div>
+        </section>
+
+        <!-- RIGHT: Editor -->
+        <section class="card">
+          <div class="row" style="justify-content: space-between">
+            <div>
+              <div style="font-weight: 800">Create / Update</div>
+              <div class="muted small">
+                Create uses <span class="kbd">POST /create</span>. Update uses
+                <span class="kbd">PUT /update/:id</span>.
+                :contentReference[oaicite:5]{index=5}
+              </div>
+            </div>
+            <button class="btn secondary" id="clearBtn">Clear</button>
+          </div>
+
+          <div style="margin-top: 12px" class="split">
+            <div>
+              <label for="id">ID (numeric for update/delete)</label>
+              <input
+                id="id"
+                placeholder="e.g. 1 (required for update/delete)"
+                inputmode="numeric"
+              />
+            </div>
+            <div>
+              <label for="price">Price</label>
+              <input id="price" placeholder="e.g. 89.99" inputmode="decimal" />
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <label for="name">Name</label>
+            <input id="name" placeholder="Product name" />
+          </div>
+
+          <div style="margin-top: 10px">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              placeholder="Product description"
+            ></textarea>
+          </div>
+
+          <div class="row" style="margin-top: 12px">
+            <button class="btn ok" id="createBtn">Create</button>
+            <button class="btn" id="updateBtn">Update</button>
+            <button class="btn danger" id="deleteBtn">Delete</button>
+            <button class="btn secondary" id="getByIdBtn">Get by ID</button>
+          </div>
+
+          <div class="hint">
+            Tip: Your backend’s update handler can behave oddly if you omit
+            fields, so this UI sends all fields you fill in (recommended).
+            :contentReference[oaicite:6]{index=6}
+          </div>
+
+          <div class="status" id="editStatus">Ready.</div>
+        </section>
+      </div>
+
+      <section class="card" style="margin-top: 16px">
+        <div style="font-weight: 800">API Base URL</div>
+        <div class="muted small">
+          If your server isn’t at
+          <span class="kbd">http://localhost:5000/</span>, change it here.
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <input id="apiBase" value="http://localhost:5000/" />
+          <button class="btn" id="saveBaseBtn">Save</button>
+          <button class="btn secondary" id="resetBaseBtn">Reset</button>
+        </div>
+        <div class="hint">
+          If you open this file directly (file://), your browser may block
+          requests unless your Node server sends CORS headers. Easiest fix:
+          serve this HTML from a local static server (same machine), or add CORS
+          headers in Node.
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (() => {
+        // --- Config ---
+        const LS_KEY = "products_ui_api_base";
+        const els = {
+          apiBase: document.getElementById("apiBase"),
+          apiBaseText: document.getElementById("apiBaseText"),
+          apiDot: document.getElementById("apiDot"),
+          pingBtn: document.getElementById("pingBtn"),
+          reloadBtn: document.getElementById("reloadBtn"),
+          saveBaseBtn: document.getElementById("saveBaseBtn"),
+          resetBaseBtn: document.getElementById("resetBaseBtn"),
+          search: document.getElementById("search"),
+          sort: document.getElementById("sort"),
+          tbody: document.getElementById("tbody"),
+          listStatus: document.getElementById("listStatus"),
+
+          id: document.getElementById("id"),
+          name: document.getElementById("name"),
+          description: document.getElementById("description"),
+          price: document.getElementById("price"),
+          clearBtn: document.getElementById("clearBtn"),
+          createBtn: document.getElementById("createBtn"),
+          updateBtn: document.getElementById("updateBtn"),
+          deleteBtn: document.getElementById("deleteBtn"),
+          getByIdBtn: document.getElementById("getByIdBtn"),
+          editStatus: document.getElementById("editStatus"),
+        };
+
+        /** @type {Array<{id:string,name?:string,description?:string,price?:number}>} */
+        let cache = [];
+
+        function setApiDot(state) {
+          // state: ok | bad | warn
+          els.apiDot.className = "dot " + state;
+        }
+
+        function getBase() {
+          return (els.apiBase.value || "").trim().replace(/\/+$/, "");
+        }
+
+        function setStatus(el, kind, msg, extra) {
+          el.classList.remove("ok", "bad");
+          if (kind === "ok") el.classList.add("ok");
+          if (kind === "bad") el.classList.add("bad");
+          el.textContent = msg + (extra ? "\n" + extra : "");
+        }
+
+        function isNumericId(id) {
+          return /^\d+$/.test(String(id || "").trim());
+        }
+
+        function money(x) {
+          const n = Number(x);
+          if (!Number.isFinite(n)) return "—";
+          return n.toLocaleString(undefined, {
+            style: "currency",
+            currency: "USD",
+          });
+        }
+
+        async function api(path, opts = {}) {
+          const url = getBase() + path;
+          const res = await fetch(url, {
+            ...opts,
+            headers: {
+              "Content-Type": "application/json",
+              ...(opts.headers || {}),
+            },
+          });
+          const text = await res.text();
+          let data = null;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch {
+            data = text;
+          }
+          if (!res.ok) {
+            const err = new Error("HTTP " + res.status);
+            err.status = res.status;
+            err.body = data;
+            throw err;
+          }
+          return data;
+        }
+
+        function readForm() {
+          const id = els.id.value.trim();
+          const name = els.name.value.trim();
+          const description = els.description.value.trim();
+          const priceStr = els.price.value.trim();
+
+          const price = priceStr === "" ? undefined : Number(priceStr);
+          return { id, name, description, price };
+        }
+
+        function fillForm(p) {
+          els.id.value = p?.id ?? "";
+          els.name.value = p?.name ?? "";
+          els.description.value = p?.description ?? "";
+          els.price.value =
+            (p?.price ?? "") === "" ? "" : String(p.price ?? "");
+        }
+
+        function clearForm() {
+          fillForm({ id: "", name: "", description: "", price: "" });
+          setStatus(els.editStatus, "ok", "Cleared.");
+        }
+
+        function filteredAndSorted(list) {
+          const q = els.search.value.trim().toLowerCase();
+          let out = list.slice();
+
+          if (q) {
+            out = out.filter((p) => {
+              const a = (p.name || "").toLowerCase();
+              const b = (p.description || "").toLowerCase();
+              const c = String(p.id || "").toLowerCase();
+              return a.includes(q) || b.includes(q) || c.includes(q);
+            });
+          }
+
+          const sort = els.sort.value;
+          const by = (fn) =>
+            out.sort((x, y) => (fn(x) > fn(y) ? 1 : fn(x) < fn(y) ? -1 : 0));
+
+          if (sort === "id_asc") by((p) => String(p.id ?? ""));
+          if (sort === "id_desc")
+            (by((p) => String(p.id ?? "")), out.reverse());
+          if (sort === "price_asc")
+            by((p) => Number(p.price ?? Number.POSITIVE_INFINITY));
+          if (sort === "price_desc")
+            (by((p) => Number(p.price ?? Number.NEGATIVE_INFINITY)),
+              out.reverse());
+          if (sort === "name_asc")
+            by((p) => String(p.name ?? "").toLowerCase());
+          if (sort === "name_desc")
+            (by((p) => String(p.name ?? "").toLowerCase()), out.reverse());
+
+          return out;
+        }
+
+        function renderTable() {
+          const list = filteredAndSorted(cache);
+          if (!list.length) {
+            els.tbody.innerHTML = `<tr><td colspan="4" class="muted">No products found.</td></tr>`;
+            return;
+          }
+          els.tbody.innerHTML = list
+            .map((p) => {
+              const numeric = isNumericId(p.id);
+              const badge = numeric
+                ? `<span class="pill" title="Numeric ID (routes support this)">Numeric</span>`
+                : `<span class="pill" title="Non-numeric ID (your routes won't match /product/:id etc.)">Non-numeric</span>`;
+              const safeName = (p.name ?? "")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+              return `
+        <tr data-id="${String(p.id).replace(/"/g, "&quot;")}">
+          <td>
+            <div class="kbd">${p.id ?? "—"}</div>
+            <div style="margin-top:6px;">${badge}</div>
+          </td>
+          <td>
+            <div style="font-weight:800;">${safeName || "—"}</div>
+            <div class="muted small" style="margin-top:4px; line-height:1.35;">
+              ${(p.description ?? "—").slice(0, 120).replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+              ${p.description && p.description.length > 120 ? "…" : ""}
+            </div>
+          </td>
+          <td class="nowrap">${money(p.price)}</td>
+          <td class="nowrap">
+            <button class="btn secondary" data-act="load">Load</button>
+            <button class="btn secondary" data-act="get" ${numeric ? "" : "disabled"} title="${numeric ? "Fetch from API" : "Disabled: non-numeric id"}">Get</button>
+          </td>
+        </tr>
+      `;
+            })
+            .join("");
+        }
+
+        async function loadAll() {
+          setStatus(els.listStatus, "ok", "Loading /product …");
+          try {
+            const data = await api("/product", { method: "GET" });
+            cache = Array.isArray(data) ? data : [];
+            renderTable();
+            setStatus(
+              els.listStatus,
+              "ok",
+              `Loaded ${cache.length} product(s). Click a row to edit.`,
+            );
+            setApiDot("ok");
+          } catch (e) {
+            console.error(e);
+            setStatus(
+              els.listStatus,
+              "bad",
+              "Failed to load products.",
+              formatErr(e),
+            );
+            setApiDot("bad");
+            els.tbody.innerHTML = `<tr><td colspan="4" class="muted">Could not load. Check API base URL and server.</td></tr>`;
+          }
+        }
+
+        async function ping() {
+          // There's no /health route, so we ping by calling GET /product (same as loadAll but without table render cost).
+          setStatus(els.listStatus, "ok", "Pinging API via GET /product …");
+          try {
+            const data = await api("/product", { method: "GET" });
+            setApiDot("ok");
+            setStatus(
+              els.listStatus,
+              "ok",
+              "API reachable ✅",
+              `Returned ${Array.isArray(data) ? data.length : 0} items.`,
+            );
+          } catch (e) {
+            setApiDot("bad");
+            setStatus(
+              els.listStatus,
+              "bad",
+              "API unreachable ❌",
+              formatErr(e),
+            );
+          }
+        }
+
+        function formatErr(e) {
+          const status = e?.status ? `HTTP ${e.status}` : "Network error";
+          const body = e?.body
+            ? typeof e.body === "string"
+              ? e.body
+              : JSON.stringify(e.body, null, 2)
+            : "";
+          return status + (body ? "\n" + body : "");
+        }
+
+        async function getById(id) {
+          if (!isNumericId(id)) {
+            setStatus(
+              els.editStatus,
+              "bad",
+              "ID must be numeric for /product/:id.",
+              `You entered: "${id}"`,
+            );
+            return;
+          }
+          setStatus(els.editStatus, "ok", `Fetching /product/${id} …`);
+          try {
+            const p = await api(`/product/${encodeURIComponent(id)}`, {
+              method: "GET",
+            });
+            fillForm(p);
+            setStatus(els.editStatus, "ok", "Loaded product from API ✅");
+            await loadAll(); // keep list in sync
+          } catch (e) {
+            setStatus(
+              els.editStatus,
+              "bad",
+              `Failed to fetch product ${id}.`,
+              formatErr(e),
+            );
+          }
+        }
+
+        async function create() {
+          const { name, description, price } = readForm();
+
+          if (!name) {
+            setStatus(els.editStatus, "bad", "Name is required for create.");
+            return;
+          }
+          const payload = {
+            name,
+            description: description || "",
+            price: Number.isFinite(price) ? price : 0,
+          };
+
+          setStatus(els.editStatus, "ok", "Creating via POST /create …");
+          try {
+            const created = await api("/create", {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            fillForm(created);
+            setStatus(
+              els.editStatus,
+              "ok",
+              "Created ✅",
+              JSON.stringify(created, null, 2),
+            );
+            await loadAll();
+          } catch (e) {
+            setStatus(els.editStatus, "bad", "Create failed.", formatErr(e));
+          }
+        }
+
+        async function update() {
+          const { id, name, description, price } = readForm();
+
+          if (!isNumericId(id)) {
+            setStatus(
+              els.editStatus,
+              "bad",
+              "ID must be numeric for PUT /update/:id.",
+              `You entered: "${id}"`,
+            );
+            return;
+          }
+          if (!name) {
+            setStatus(
+              els.editStatus,
+              "bad",
+              "Name is required for update (recommended to send all fields).",
+            );
+            return;
+          }
+
+          const payload = {
+            name,
+            description: description || "",
+            price: Number.isFinite(price) ? price : 0,
+          };
+
+          setStatus(els.editStatus, "ok", `Updating via PUT /update/${id} …`);
+          try {
+            const updated = await api(`/update/${encodeURIComponent(id)}`, {
+              method: "PUT",
+              body: JSON.stringify(payload),
+            });
+            fillForm(updated);
+            setStatus(
+              els.editStatus,
+              "ok",
+              "Updated ✅",
+              JSON.stringify(updated, null, 2),
+            );
+            await loadAll();
+          } catch (e) {
+            setStatus(els.editStatus, "bad", "Update failed.", formatErr(e));
+          }
+        }
+
+        async function del() {
+          const { id } = readForm();
+          if (!isNumericId(id)) {
+            setStatus(
+              els.editStatus,
+              "bad",
+              "ID must be numeric for DELETE /delete/:id.",
+              `You entered: "${id}"`,
+            );
+            return;
+          }
+          if (!confirm(`Delete product ${id}?`)) return;
+
+          setStatus(
+            els.editStatus,
+            "ok",
+            `Deleting via DELETE /delete/${id} …`,
+          );
+          try {
+            const resp = await api(`/delete/${encodeURIComponent(id)}`, {
+              method: "DELETE",
+            });
+            clearForm();
+            setStatus(
+              els.editStatus,
+              "ok",
+              "Deleted ✅",
+              typeof resp === "string" ? resp : JSON.stringify(resp, null, 2),
+            );
+            await loadAll();
+          } catch (e) {
+            setStatus(els.editStatus, "bad", "Delete failed.", formatErr(e));
+          }
+        }
+
+        function initBase() {
+          const saved = localStorage.getItem(LS_KEY);
+          if (saved) els.apiBase.value = saved;
+          els.apiBaseText.textContent = getBase();
+        }
+
+        function saveBase() {
+          const b = getBase();
+          if (!b) return;
+          localStorage.setItem(LS_KEY, b);
+          els.apiBaseText.textContent = b;
+          setApiDot("warn");
+          setStatus(
+            els.listStatus,
+            "ok",
+            "Saved API base. Click Ping or Reload.",
+          );
+        }
+
+        function resetBase() {
+          els.apiBase.value = "http://localhost:5000/";
+          saveBase();
+        }
+
+        // --- Events ---
+        els.saveBaseBtn.addEventListener("click", saveBase);
+        els.resetBaseBtn.addEventListener("click", resetBase);
+
+        els.reloadBtn.addEventListener("click", loadAll);
+        els.pingBtn.addEventListener("click", ping);
+
+        els.search.addEventListener("input", renderTable);
+        els.sort.addEventListener("change", renderTable);
+
+        els.clearBtn.addEventListener("click", clearForm);
+        els.createBtn.addEventListener("click", create);
+        els.updateBtn.addEventListener("click", update);
+        els.deleteBtn.addEventListener("click", del);
+        els.getByIdBtn.addEventListener("click", () =>
+          getById(els.id.value.trim()),
+        );
+
+        document
+          .getElementById("tbody")
+          .addEventListener("click", async (e) => {
+            const btn = e.target.closest("button");
+            const tr = e.target.closest("tr");
+            if (!tr) return;
+            const id = tr.getAttribute("data-id");
+            const p = cache.find((x) => String(x.id) === String(id));
+            if (!p) return;
+
+            if (!btn) {
+              fillForm(p);
+              setStatus(
+                els.editStatus,
+                "ok",
+                "Loaded from table (local). Use Get by ID to fetch from API.",
+              );
+              return;
+            }
+            const act = btn.getAttribute("data-act");
+            if (act === "load") {
+              fillForm(p);
+              setStatus(els.editStatus, "ok", "Loaded from table (local).");
+            } else if (act === "get") {
+              await getById(id);
+            }
+          });
+
+        // --- Boot ---
+        initBase();
+        els.apiBaseText.textContent = getBase();
+        loadAll();
+      })();
+    </script>
+  </body>
+</html>
