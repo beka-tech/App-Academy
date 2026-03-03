@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        display: flex;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 40px;
+        color: #fff;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 25px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      th,
+      td {
+        padding: 14px;
+        text-align: left;
+      }
+
+      th {
+        background: rgba(255, 255, 255, 0.2);
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      tr:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transition: 0.3s ease;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      input {
+        flex: 1;
+        min-width: 200px;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+      }
+
+      input:focus {
+        box-shadow: 0 0 0 2px #fff;
+      }
+
+      button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: 0.3s ease;
+      }
+
+      .btn-primary {
+        background: #22c55e;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #16a34a;
+      }
+
+      .btn-update {
+        background: #3b82f6;
+        color: white;
+      }
+
+      .btn-update:hover {
+        background: #2563eb;
+      }
+
+      .btn-delete {
+        background: #ef4444;
+        color: white;
+      }
+
+      .btn-delete:hover {
+        background: #dc2626;
+      }
+
+      @media (max-width: 768px) {
+        form {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>👤 User Management System</h1>
+
+      <!-- USERS TABLE -->
+      <div class="card">
+        <h2>Current Users</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Age</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (data.length === 0) { %>
+            <tr>
+              <td colspan="5" style="text-align: center">No users found</td>
+            </tr>
+            <% } %> <% data.forEach(user => { %>
+            <tr>
+              <td><%= user.userUniqueId %></td>
+              <td><%= user.userName %></td>
+              <td><%= user.userEmail %></td>
+              <td><%= user.userAge %></td>
+              <td>
+                <form action="/delete" method="post">
+                  <input
+                    type="hidden"
+                    name="userUniqueId"
+                    value="<%= user.userUniqueId %>"
+                  />
+                  <button class="btn-delete">Delete</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ADD USER -->
+      <div class="card">
+        <h2>Add User</h2>
+        <form action="/" method="post">
+          <input
+            type="text"
+            name="userUniqueId"
+            placeholder="User ID"
+            required
+          />
+          <input type="text" name="userName" placeholder="User Name" required />
+          <input
+            type="email"
+            name="userEmail"
+            placeholder="User Email"
+            required
+          />
+          <input type="number" name="userAge" placeholder="User Age" required />
+          <button class="btn-primary">Add</button>
+        </form>
+      </div>
+
+      <!-- UPDATE USER -->
+      <div class="card">
+        <h2>Update User</h2>
+        <form action="/update" method="post">
+          <input
+            type="text"
+            name="userUniqueId"
+            placeholder="User ID (Required)"
+            required
+          />
+          <input type="text" name="userName" placeholder="New Name" />
+          <input type="email" name="userEmail" placeholder="New Email" />
+          <input type="number" name="userAge" placeholder="New Age" />
+          <button class="btn-update">Update</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
