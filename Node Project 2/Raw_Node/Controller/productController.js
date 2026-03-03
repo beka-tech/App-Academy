@@ -1,5 +1,5 @@
 const product = require("../model/productmodel");
-const { generate4DigitId, getPostData, update } = require("../util");
+const { getPostData, update } = require("../util");
 
 async function getproduct(req, res) {
   try {
@@ -68,9 +68,27 @@ async function UpdateProductByID(req, res, id) {
   }
 }
 
+async function DeleteProductByID(req, res, id) {
+  try {
+    const products = await product.findByID(id);
+    if (!products) {
+      res.writeHead(404, { "Content-Type": "text/JSON" });
+      res.end("Not Founf");
+    } else {
+      const deletedproduct = await product.deleteted(id);
+
+      res.writeHead(200, { "Content-Type": "text/JSON" });
+      res.end(JSON.stringify(products) + `has been deleted`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   getproduct,
   getProductByID,
   createProduct,
   UpdateProductByID,
+  DeleteProductByID,
 };

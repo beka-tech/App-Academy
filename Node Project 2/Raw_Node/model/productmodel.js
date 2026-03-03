@@ -28,9 +28,15 @@ function update(id, productData) {
   return new Promise((resolve, rejecct) => {
     const index = products.findIndex((p) => p.id === id);
     products[index] = { id, ...productData };
-    WriteDataFile("./data/products.json", products); // pass the products to the util file to wite it in the JSON file
+    WriteDataFile("./data/products.json", products); // pass the updated  products to the util file to wite it in the JSON file
     resolve(products[index]);
   });
 }
-
-module.exports = { findAll, findByID, create, update };
+function deleteted(id) {
+  return new Promise((resolve, reject) => {
+    const product = products.filter((p) => p.id !== id);
+    WriteDataFile("./data/products.json", product);
+    resolve();
+  });
+}
+module.exports = { findAll, findByID, create, update, deleteted };
