@@ -1,5 +1,5 @@
 const product = require("../model/productmodel");
-const { getPostData, update } = require("../util");
+const { getPostData } = require("../util");
 
 async function getproduct(req, res) {
   try {

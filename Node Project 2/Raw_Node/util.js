@@ -27,6 +27,14 @@ function getPostData(req) {
   });
 }
 
+// function getBody(req) {
+//   return new Promise((resolve) => {
+//     let body = "";
+//     req.on("data", chunk => body += chunk);
+//     req.on("end", () => resolve(JSON.parse(body || "{}")));
+//   });
+// }
+
 // Simple 4-digit number (with leading zeros)
 function generate4DigitId() {
   return Math.floor(Math.random() * 10000)
