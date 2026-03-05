@@ -5,6 +5,8 @@ const {
   getUser,
   getUserByID,
   createUser,
+  updateUser,
+  deleteUser,
 } = require("./Controller/userController");
 const server = http.createServer((req, res) => {
   const { method, url } = req;
@@ -14,10 +16,16 @@ const server = http.createServer((req, res) => {
   if (pathname === "/user" && req.method === "GET") {
     getUser(req, res);
   } else if (pathname.startsWith("/user/") && req.method === "GET") {
-    const userUniqueId = parseInt(pathname.split("/").pop());
+    const userUniqueId = pathname.split("/").pop();
     getUserByID(req, res, userUniqueId);
   } else if (pathname.startsWith("/user/create") && req.method === "POST") {
     createUser(req, res);
+  } else if (pathname.startsWith("/user/update/") && req.method === "PUT") {
+    const userUniqueId = pathname.split("/").pop();
+    updateUser(req, res, userUniqueId);
+  } else if (pathname.startsWith("/user/delete/") && req.method === "DELETE") {
+    const userUniqueId = pathname.split("/").pop();
+    deleteUser(req, res, userUniqueId);
   } else {
     res.writeHead(404, { "content-type": "text/plain" });
     res.end("Page Not Found");
