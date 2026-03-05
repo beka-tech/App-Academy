@@ -34,8 +34,16 @@ and basic file-based storage.
 
 ## Project Structure
 
-project │ ├── server.js ├── Controller │ └── userController.js ├── model
-│ └── userModel.js ├── data │ └── user.json └── util.js
+project
+│
+├── server.js
+├── Controller
+│ └── userController.js
+├── model
+│ └── userModel.js
+├── data
+│ └── user.json
+└── util.js
 
 ------------------------------------------------------------------------
 
