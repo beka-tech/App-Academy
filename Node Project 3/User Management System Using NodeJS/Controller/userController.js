@@ -15,10 +15,10 @@ async function getUser(req, res) {
 async function getUserByID(req, res, userUniqueId) {
   try {
     const user = await users.findByID(userUniqueId);
-    // if (!user) {
-    //   res.writeHead(404, { "content-type": "text/plain" });
-    //   res.end("User Not Found");
-    // }
+    if (!user) {
+      res.writeHead(404, { "content-type": "text/plain" });
+      res.end("User Not Found");
+    }
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(user));
   } catch (error) {
