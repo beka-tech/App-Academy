@@ -1068,18 +1068,6 @@
     "createdAt": "2026-03-31T09:00:00Z"
   },
   {
-    "userUniqueId": "90",
-    "userName": "Matthew Johnson",
-    "userEmail": "matthew.johnson90@example.com",
-    "userAge": 25,
-    "phoneNumber": "+76-148-3621443",
-    "gender": "Female",
-    "address": "178 Maple Ave",
-    "city": "Seattle",
-    "country": "USA",
-    "createdAt": "2026-04-01T09:00:00Z"
-  },
-  {
     "userUniqueId": "91",
     "userName": "Lucas Garcia",
     "userEmail": "lucas.garcia91@example.com",
@@ -1198,5 +1186,13 @@
     "address": "Bole Road",
     "city": "Addis Ababa",
     "country": "Ethiopia"
+  },
+  {
+    "userUniqueId": "892d5a1c-737b-49a5-b218-9f44e80d7836",
+    "createdAt": "2026-03-06T12:49:37.312Z",
+    "userName": "Adam David",
+    "userEmail": "john@example.com",
+    "userAge": 34,
+    "phoneNumber": "+251912345678"
   }
 ]

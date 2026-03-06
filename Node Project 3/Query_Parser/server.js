@@ -47,7 +47,7 @@ const server = http.createServer((req, res) => {
   if (parsedUrl.pathname === "/products" && req.method === "GET") {
     let results = [...products];
 
-    // Filtering
+    // Filtering  ?category=electronics`
     if (query.category) {
       results = results.filter((p) => p.category === query.category);
     }
@@ -74,21 +74,22 @@ const server = http.createServer((req, res) => {
       });
     }
 
-    // Pagination
-    const page = parseInt(query.page) || 2;
-    const limit = parseInt(query.limit) || 4;
-    const start = (page - 1) * limit;
-    const end = start + limit;
+    // // Pagination
+    // const page = parseInt(query.page) || 2;
+    // const limit = parseInt(query.limit) || 4;
+    // const start = (page - 1) * limit;
+    // const end = start + limit;
 
-    const paginatedResults = results.slice(start, end);
+    // const paginatedResults = results.slice(start, end);
 
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(
       JSON.stringify({
-        page,
-        limit,
-        total: results.length,
-        data: paginatedResults,
+        results,
+        // page,
+        // limit,
+        // total: results.length,
+        // data: paginatedResults,
       }),
     );
   } else {

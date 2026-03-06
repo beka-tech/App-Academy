@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop Pro 14",
+    "category": "electronics",
+    "price": 1400
+  },
+  {
+    "id": 2,
+    "name": "Laptop Air 13",
+    "category": "electronics",
+    "price": 1100
+  },
+  {
+    "id": 3,
+    "name": "Gaming Laptop X",
+    "category": "electronics",
+    "price": 1800
+  },
+  {
+    "id": 4,
+    "name": "Smartphone Ultra",
+    "category": "electronics",
+    "price": 950
+  },
+  {
+    "id": 5,
+    "name": "Smartphone Lite",
+    "category": "electronics",
+    "price": 500
+  },
+  {
+    "id": 6,
+    "name": "Wireless Headphones",
+    "category": "electronics",
+    "price": 220
+  },
+  {
+    "id": 7,
+    "name": "Noise Canceling Headphones",
+    "category": "electronics",
+    "price": 320
+  },
+  {
+    "id": 8,
+    "name": "Mechanical Keyboard",
+    "category": "electronics",
+    "price": 180
+  },
+  {
+    "id": 9,
+    "name": "Gaming Mouse",
+    "category": "electronics",
+    "price": 90
+  },
+  {
+    "id": 10,
+    "name": "4K Monitor",
+    "category": "electronics",
+    "price": 600
+  },
+  {
+    "id": 11,
+    "name": "Running Shoes",
+    "category": "fashion",
+    "price": 130
+  },
+  {
+    "id": 12,
+    "name": "Basketball Shoes",
+    "category": "fashion",
+    "price": 150
+  },
+  {
+    "id": 13,
+    "name": "Casual Sneakers",
+    "category": "fashion",
+    "price": 95
+  },
+  {
+    "id": 14,
+    "name": "Denim Jacket",
+    "category": "fashion",
+    "price": 180
+  },
+  {
+    "id": 15,
+    "name": "Plain T-shirt",
+    "category": "fashion",
+    "price": 35
+  },
+  {
+    "id": 16,
+    "name": "Graphic T-shirt",
+    "category": "fashion",
+    "price": 45
+  }
+]
