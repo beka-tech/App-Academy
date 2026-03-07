@@ -1,4 +1,3 @@
-
 function filterByCategory(data, category) {
   return data.filter((item) => item.category === category);
 }
@@ -9,9 +8,7 @@ function filterByPrice(data, minPrice) {
 
 function searchByName(data, search) {
   const term = search.toLowerCase();
-  return data.filter((item) =>
-    item.name.toLowerCase().includes(term)
-  );
+  return data.filter((item) => item.name.toLowerCase().includes(term));
 }
 
 function sortData(data, sortField) {
