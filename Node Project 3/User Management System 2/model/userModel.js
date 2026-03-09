@@ -1,8 +1,6 @@
-const { resolve } = require("dns");
 const users = require("../data/user.json");
-const { readData, writeData } = require("../util");
+const { writeData } = require("../util");
 const crypto = require("crypto");
-const { rejects } = require("assert");
 
 function findAll() {
   return new Promise((resolve, rejects) => {

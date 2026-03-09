@@ -39,7 +39,7 @@ function getBody(req) {
   });
 }
 
-function filterByGender(data, gender) {
+function filterBygender(data, gender) {
   if (!gender) return data;
 
   return data.filter(
@@ -104,7 +104,7 @@ module.exports = {
   readData,
   writeData,
   getBody,
-  filterByGender,
+  filterBygender,
   filterByAge,
   searchByCountry,
   sortData,
