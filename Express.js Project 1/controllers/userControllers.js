@@ -1,5 +1,6 @@
 const users = require("../data/user");
 const { WriteDataFile, generate4DigitId } = require("../util");
+const { findByID, create, update, deletes } = require("../model/userModel");
 
 async function getAllUser(req, res) {
   try {
@@ -11,7 +12,8 @@ async function getAllUser(req, res) {
 
 async function getUserByID(req, res) {
   try {
-    const user = users.find((u) => u.userUniqueId === req.params.id);
+    const id = req.params.id;
+    const user = await findByID(id);
     if (!user) res.send("404 User Not Found");
     res.send(user);
   } catch (error) {
@@ -22,16 +24,8 @@ async function getUserByID(req, res) {
 async function createUser(req, res) {
   try {
     const user = req.body;
-
-    const newUser = {
-      userUniqueId: generate4DigitId(),
-      ...user,
-      createdAt: new Date().toISOString(),
-    };
-
-    users.push(newUser);
-    WriteDataFile("./data/user.json", users);
-    res.json(newUser);
+    const createdUser = await create(user);
+    res.json(createdUser);
   } catch (error) {
     console.log(error);
   }
@@ -40,12 +34,9 @@ async function createUser(req, res) {
 async function updateUser(req, res) {
   try {
     const user = req.body;
-    const Index = users.findIndex((u) => u.userUniqueId === req.params.id);
-    users[Index] = { ...user, createdAt: new Date().toISOString() };
-
-    users.push(users[Index]);
-    WriteDataFile("./data/user.json", users);
-    res.json(users[Index]);
+    const id = req.params.id;
+    const updatedUser = await update(user, id);
+    res.json(updatedUser);
   } catch (error) {
     console.log(error);
   }
@@ -53,12 +44,9 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
   try {
-    const user = users.filter((u) => u.userUniqueId !== req.params.id);
-    if (!users.find((u) => u.userUniqueId === req.params.id))
-      res.send("404 User Not Found");
-
-    WriteDataFile("./data/user.json", user);
-    res.send(`User 4{req.params.id} Deleted `);
+    const id = req.params.id;
+    const d = await deletes(id);
+    res.send(`User ${d} Deleted `);
   } catch (error) {
     console.log(error);
   }
